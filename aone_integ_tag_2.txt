@@ -1,0 +1,35 @@
+<script type="text/javascript">
+(function(d,s,e,t){e=d.createElement(s);e.type='text/java'+s;e.async='async';
+e.src='http'+('https:'===location.protocol?'s://s':'://')+'cdn.cxense.com/cx.js';
+t=d.getElementsByTagName(s)[0];t.parentNode.insertBefore(e,t);})(document,'script');
+</script>
+<script type="text/javascript">
+var cX = cX || {}; cX.callQueue = cX.callQueue || [];
+cX.callQueue.push(['setSiteId', '<SITE_ID>']);
+cX.callQueue.push(['sendPageViewEvent']);
+cX.callQueue.push(['sync', {'partner': 'aone', 'customerId': '<OID>'}]);
+cX.callQueue.push(['getUserSegmentIds', {
+    persistedQueryId: '<PERSISTED_QUERY_ID1>',
+    callback: function(segments) {
+        window.aoevt = segments.join();
+        cX.loadScript('//img.ak.impact-ad.jp/ut/<OID>_1760.js');
+    }
+}]);
+
+var segArray = [];
+var aone_segments = function(segs){
+    segArray = segs;
+    cX.callQueue.push(['invoke', function() {
+        var cval = cX.getCookie("__aoneseg");
+        if (!cval) {
+          cX.setSiteId(cx_siteid);
+          cX.setEventAttributes({ origin:'<ORIGIN>', persistedQueryId:'<PERSISTED_QUERY_ID2>'});
+          for (var i = 0; i < segArray.length; i++){
+            cX.sendEvent('aone-seg', {segmentId:segArray[i].toString()});
+          }
+          cX.setCookie('__aoneseg', 'true', 1, '/', cX.getTopLevelDomain());
+        }
+    }]);
+}
+</script>
+<script type="text/javascript" src="//penta.a.one.impact-ad.jp/dd?oid=<OID>&rft=j&jsonp=aone_segments"></script>
