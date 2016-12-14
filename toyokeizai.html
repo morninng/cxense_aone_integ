@@ -51,9 +51,43 @@ TKOLIB.getQueryValue = function(_key){
 
 <!-- 設定するたぐ -->
 
-<script type="text/javascript" src="./segment_lookup.js"></script>
+
+
 <script type="text/javascript">
 
+var cX = cX || {}; cX.callQueue = cX.callQueue || [];
+cX.callQueue.push(['setSiteId', '1128275557251903601']);
+ var queryDict = TKOLIB.getQueryData();
+var cParams = {};
+var CPARAM = ['utm_source','utm_medium','utm_term','utm_content','utm_campaign'];
+for (i=0;i<CPARAM.length;i++) {
+ if (queryDict[CPARAM[i]] !== undefined && queryDict[CPARAM[i]] !== null) {
+  cParams[CPARAM[i]] = String(queryDict[CPARAM[i]]).substr(0, 20);
+ }
+}
+cX.callQueue.push(["setCustomParameters", cParams]);
+cX.callQueue.push(['sync', {'partner': 'aone', 'customerId': 'c46fbaf3eee66839'}]);
+cX.callQueue.push(['sendPageViewEvent']);
+</script>
+<script type="text/javascript">
+(function(d,s,e,t){e=d.createElement(s);e.type='text/java'+s;e.async='async';
+e.src='http'+('https:'===location.protocol?'s://s':'://')+'cdn.cxense.com/cx.js';
+t=d.getElementsByTagName(s)[0];t.parentNode.insertBefore(e,t);})(document,'script');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="http://webdemo.dac.co.jp/cxense/customer/toyokeizai/segment_lookup.js"></script>
+<script type="text/javascript">
 (function () {
 
 window.send_segments_to_cxense = function(aone_segments_arr){
@@ -128,7 +162,8 @@ window.call_aone = function(cx_seg_arr){
     return;
   }
 
-  var oid = 'c46fbaf3eee66839';
+  //var oid = 'c46fbaf3eee66839';
+  var oid = '537e099ead12bae1';
   var format = 'jp';
   var callback='send_segments_to_cxense';
   var src=source_url(cx_seg_arr);
@@ -164,36 +199,19 @@ window.call_aone = function(cx_seg_arr){
 }());
 
 
-
-
-var cX = cX || {}; cX.callQueue = cX.callQueue || [];
-cX.callQueue.push(['setSiteId', '1128275557251903601']);
- var queryDict = TKOLIB.getQueryData();
-var cParams = {};
-var CPARAM = ['utm_source','utm_medium','utm_term','utm_content','utm_campaign'];
-for (i=0;i<CPARAM.length;i++) {
- if (queryDict[CPARAM[i]] !== undefined && queryDict[CPARAM[i]] !== null) {
-  cParams[CPARAM[i]] = String(queryDict[CPARAM[i]]).substr(0, 20);
- }
-}
-cX.callQueue.push(["setCustomParameters", cParams]);
-cX.callQueue.push(['sync', {'partner': 'aone', 'customerId': 'c46fbaf3eee66839'}]);
-cX.callQueue.push(['sendPageViewEvent']);
 cX.callQueue.push(['getUserSegmentIds', {
     persistedQueryId: '9518363a0daeab939666b96ebb48d6b01eaa4f69',
     callback: function(cx_seg_arr) {
         console.log("cxense segments is retrieved", cx_seg_arr);
         call_aone(cx_seg_arr);
-        //cX.loadScript('//img.ak.impact-ad.jp/ut/c46fbaf3eee66839_2912.js');
     }
 }]);
 </script>
 
-<script type="text/javascript">
-(function(d,s,e,t){e=d.createElement(s);e.type='text/java'+s;e.async='async';
-e.src='http'+('https:'===location.protocol?'s://s':'://')+'cdn.cxense.com/cx.js';
-t=d.getElementsByTagName(s)[0];t.parentNode.insertBefore(e,t);})(document,'script');
-</script>
+
+
+
+
 
 
 
