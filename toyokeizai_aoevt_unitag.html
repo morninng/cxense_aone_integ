@@ -53,6 +53,7 @@ TKOLIB.getQueryValue = function(_key){
 
 
 
+
 <script type="text/javascript" src="http://webdemo.dac.co.jp/cxense/customer/toyokeizai/segment_lookup.js"></script>
 <script type="text/javascript">
 
@@ -74,7 +75,7 @@ cX.callQueue.push(['getUserSegmentIds', {
     callback: function(cx_seg_arr) {
         console.log("cxense segments is retrieved", cx_seg_arr);
          window.aoevt = cx_seg_arr.join();
-        //  cX.loadScript('//img.ak.impact-ad.jp/ut/537e099ead12bae1_2919.js');
+          cX.loadScript('//img.ak.impact-ad.jp/ut/537e099ead12bae1_2919.js');
     }
 }]);
 </script>
@@ -86,68 +87,7 @@ t=d.getElementsByTagName(s)[0];t.parentNode.insertBefore(e,t);})(document,'scrip
 
 
 
-<!-- aoneに設定するタグ-->
-
-
-<script type="text/javascript">
-
-
-function aonecxense(aone_segments_arr){
-
-  if (! aone_segments_arr instanceof Array){
-    return;
-  }
-
-  console.log("aonecxense is ", aone_segments_arr);
-
-
-  cX.callQueue.push(['invoke', function() {
-    var cval = cX.getCookie("__aoneseg");
-    console.log("cval", cval);
-    if (!cval) {
-      cX.setSiteId('1128275557251903601');
-      cX.setEventAttributes({ origin:'dac-web', persistedQueryId:'2688327ec23ce005025781f1a824670447422c56'});
-      console.log("aone seg  push");
-      for (var i = 0; i < aone_segments_arr.length; i++){
-        var seg_str = aone_segments_arr[i].toString();
-        var key = aone_segmentLookup(seg_str);
-        if (key) {
-            var jsonObj = {};
-            jsonObj[key] = aone_segments_arr[i].toString();
-            console.log("jsonObj", jsonObj);
-            cX.sendEvent('aone-seg', jsonObj);
-        }
-      }
-      cX.setCookie('__aoneseg', 'true', 1, '/', cX.getTopLevelDomain());
-    }
-  }]);
-}
-
-
-</script>
-
-
-
-<script type="text/javascript">
-
-(function () {
-  var oid = '537e099ead12bae1';
-  var callback='aonecxense';
-  var url=('https:' == document.location.protocol ? 'https' : 'http')+'://penta.a.one.impact-ad.jp/dd?';
-  url+='oid='+oid;
-  url+='&rft=j'
-  url+='&jsonp='+callback;
-  var j=document.createElement('script');
-  j.async=true;
-  j.src=url;
-  var b = document.getElementsByTagName('script')[0];
-  b.parentNode.insertBefore(j, b);
-
-}());
-
-
-</script>
-
+<script type="text/javascript">(function(d,u){var b=d.getElementsByTagName("script")[0],j=d.createElement("script");j.async=true;j.src=u;b.parentNode.insertBefore(j,b);})(document,"//img.ak.impact-ad.jp/ut/537e099ead12bae1_2919.js");</script><noscript><iframe src="//nspt.unitag.jp/537e099ead12bae1_2919.php" width="0" height="0" frameborder="0"></iframe></noscript>
 
 
 <!-- 単体テスト --> 
