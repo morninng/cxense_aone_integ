@@ -1,7 +1,10 @@
 var _segmentMapping = [
   ["202987","gender"],
-  ["i+p7U6y9l2o","gender"],
-  ["204499","age"]
+  ["205172","gender"],
+  ["204499","age"],
+  ["202987","gender"],
+  ["205173","gender"],
+  ["205174","age"]
 ];
 
 console.log("aone_segmentLookup is defined");
